@@ -6,8 +6,13 @@ import React, {
   useState,
 } from "react";
 import { createRoot } from "react-dom/client";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import { Droplets, ExternalLink, Sun } from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+  MotionConfig,
+  useMotionValue,
+} from "framer-motion";
+import { ExternalLink, Sun } from "lucide-react";
 import "./index.css";
 
 const siteIllustrations = import.meta.glob(
@@ -40,6 +45,7 @@ const treeAssets = {
   leafVibes: asset("tree/leaf-vibes.png"),
   leafSmallA: asset("tree/leaf-small-a.png"),
   leafSmallB: asset("tree/leaf-small-b.png"),
+  leafSingle: asset("tree/leaf-single.png"),
 };
 
 const puffAssets = {
@@ -219,12 +225,16 @@ function App() {
 
 function IntroScene({ onDone }) {
   const [stage, setStage] = useState("idle");
+  const [cursorVisible, setCursorVisible] = useState(false);
+  const cursorX = useMotionValue(-120);
+  const cursorY = useMotionValue(-120);
   const watering = stage !== "idle";
+  const growing = stage === "growing";
 
   useEffect(() => {
     if (stage !== "pouring") return undefined;
 
-    const growTimer = window.setTimeout(() => setStage("growing"), 680);
+    const growTimer = window.setTimeout(() => setStage("growing"), 760);
 
     return () => window.clearTimeout(growTimer);
   }, [stage]);
@@ -232,7 +242,7 @@ function IntroScene({ onDone }) {
   useEffect(() => {
     if (stage !== "growing") return undefined;
 
-    const doneTimer = window.setTimeout(onDone, 1120);
+    const doneTimer = window.setTimeout(onDone, 2700);
 
     return () => window.clearTimeout(doneTimer);
   }, [stage, onDone]);
@@ -242,13 +252,26 @@ function IntroScene({ onDone }) {
     setStage("pouring");
   };
 
+  const moveWateringCursor = (event) => {
+    if (event.pointerType === "touch") return;
+    cursorX.set(event.clientX - 18);
+    cursorY.set(event.clientY - 20);
+    setCursorVisible(true);
+  };
+
   return (
     <motion.section
       className={`intro-screen${watering ? " is-watering" : ""}`}
       exit={introExit.hidden}
       aria-labelledby="intro-title"
       onClick={startWatering}
+      onPointerEnter={moveWateringCursor}
+      onPointerMove={moveWateringCursor}
+      onPointerLeave={() => setCursorVisible(false)}
     >
+      <span className="sr-only" id="intro-title">
+        点击页面浇水，观看树木生长
+      </span>
       <button
         className="skip-button"
         type="button"
@@ -274,6 +297,41 @@ function IntroScene({ onDone }) {
         <Sun size={88} strokeWidth={3.2} />
       </motion.div>
 
+      <motion.div
+        className="watering-cursor"
+        aria-hidden="true"
+        style={{ x: cursorX, y: cursorY }}
+        animate={{ opacity: cursorVisible ? 1 : 0 }}
+        transition={{ duration: 0.12 }}
+      >
+        <motion.img
+          className="watering-cursor-can"
+          src={introAssets.wateringCan}
+          alt=""
+          draggable="false"
+          animate={watering ? { rotate: 18, x: 4, y: 4 } : { rotate: 0, x: 0, y: 0 }}
+          transition={{ duration: 0.32, ease: "easeOut" }}
+        />
+        <motion.img
+          className="watering-cursor-water"
+          src={introAssets.waterArc}
+          alt=""
+          draggable="false"
+          initial={false}
+          animate={
+            stage === "pouring"
+              ? {
+                  opacity: [0, 1, 0.9, 0],
+                  x: [0, -3, -8],
+                  y: [0, 7, 18],
+                  scale: [0.84, 1, 1.08],
+                }
+              : { opacity: 0, x: 0, y: 0, scale: 0.84 }
+          }
+          transition={{ duration: 0.78, ease: "easeOut" }}
+        />
+      </motion.div>
+
       <div className="intro-center">
         <motion.div
           className="intro-illustration"
@@ -281,58 +339,64 @@ function IntroScene({ onDone }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
         >
-          <motion.img
-            className="intro-can"
-            src={introAssets.wateringCan}
-            alt=""
-            draggable="false"
-            animate={
-              stage === "idle"
-                ? { rotate: 0, x: 0, y: 0, opacity: 0.95 }
-                : stage === "pouring"
-                  ? { rotate: 18, x: 14, y: 8, opacity: 1 }
-                  : { rotate: 18, x: 26, y: 12, opacity: 0 }
-            }
-            transition={{ duration: stage === "growing" ? 0.28 : 0.48, ease: "easeOut" }}
-          />
-          <motion.img
-            className="intro-water"
-            src={introAssets.waterArc}
-            alt=""
-            draggable="false"
-            initial={false}
-            animate={
-              stage === "pouring"
-                ? {
-                    opacity: [0, 1, 0.9, 0],
-                    x: [0, 0, -4, -8],
-                    y: [0, 3, 9, 16],
-                    rotate: -71,
-                    scaleX: 1,
-                  }
-                : { opacity: 0, x: 0, y: 0, rotate: -71, scaleX: 1 }
-            }
-            transition={{
-              duration: 0.78,
-              ease: "easeOut",
-              times: [0, 0.12, 0.68, 1],
-            }}
-          />
           <motion.div
             className="intro-grown-tree"
             aria-hidden="true"
             initial={false}
-            animate={
-              stage === "growing"
-                ? { opacity: 1, scaleY: 1, y: -4 }
-                : { opacity: 0, scaleY: 0.2, y: 84 }
-            }
-            transition={{ duration: 1.02, ease: "easeOut" }}
+            animate={{ opacity: growing ? 1 : 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
           >
-            <img className="intro-grow-trunk" src={treeAssets.trunk} alt="" />
-            <img className="intro-grow-branch" src={treeAssets.branchUpper} alt="" />
-            <img className="intro-grow-leaf one" src={treeAssets.leafSmallA} alt="" />
-            <img className="intro-grow-leaf two" src={treeAssets.leafSmallB} alt="" />
+            {/* Growth rhythm inspired by the CC BY-NC 4.0 branch reference:
+                https://github.com/xxoogreymon-prog/SKILL-rainCurtain-branch-swallow */}
+            <motion.img
+              className="intro-grow-trunk"
+              src={treeAssets.trunk}
+              alt=""
+              animate={{ scaleY: growing ? 1 : 0.04, opacity: growing ? 1 : 0 }}
+              transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            />
+            {[
+              { className: "upper-right", src: treeAssets.branchUpper, delay: 0.62, scaleX: 1 },
+              { className: "upper-left", src: treeAssets.branchUpper, delay: 0.76, scaleX: -1 },
+              { className: "lower-right", src: treeAssets.branchLower, delay: 0.9, scaleX: 1 },
+              { className: "lower-left", src: treeAssets.branchLower, delay: 1.04, scaleX: -1 },
+            ].map((branch) => (
+              <motion.img
+                className={`intro-grow-branch ${branch.className}`}
+                src={branch.src}
+                alt=""
+                key={branch.className}
+                animate={{
+                  opacity: growing ? 1 : 0,
+                  scaleX: growing ? branch.scaleX : 0,
+                }}
+                transition={{
+                  opacity: { duration: 0.18, delay: branch.delay },
+                  scaleX: { duration: 0.82, delay: branch.delay, ease: [0.22, 1, 0.36, 1] },
+                }}
+              />
+            ))}
+            {[
+              { className: "leaf-one", src: treeAssets.leafSmallA, delay: 1.2, rotate: -8 },
+              { className: "leaf-two", src: treeAssets.leafSmallB, delay: 1.32, rotate: 6 },
+              { className: "leaf-three", src: treeAssets.leafSingle, delay: 1.44, rotate: -14 },
+              { className: "leaf-four", src: treeAssets.leafSmallA, delay: 1.56, rotate: 10 },
+              { className: "leaf-five", src: treeAssets.leafSingle, delay: 1.68, rotate: -4 },
+              { className: "leaf-six", src: treeAssets.leafSmallB, delay: 1.8, rotate: 12 },
+            ].map((leaf) => (
+              <motion.img
+                className={`intro-grow-leaf ${leaf.className}`}
+                src={leaf.src}
+                alt=""
+                key={leaf.className}
+                animate={{
+                  opacity: growing ? 1 : 0,
+                  scale: growing ? 1 : 0.25,
+                  rotate: growing ? leaf.rotate : 0,
+                }}
+                transition={{ duration: 0.5, delay: leaf.delay, ease: "easeOut" }}
+              />
+            ))}
           </motion.div>
           <motion.img
             className="intro-seedling"
@@ -359,26 +423,6 @@ function IntroScene({ onDone }) {
           />
         </motion.div>
       </div>
-
-      <motion.button
-        className="water-button"
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation();
-          startWatering();
-        }}
-        disabled={watering}
-        aria-describedby="intro-title"
-        animate={watering ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
-        whileHover={watering ? undefined : { y: -3, rotate: -0.8 }}
-        whileTap={watering ? undefined : { y: 1, scale: 0.985 }}
-        transition={{ duration: 0.26, ease: "easeOut" }}
-      >
-        <span className="water-icon" aria-hidden="true">
-          <Droplets size={23} />
-        </span>
-        <span id="intro-title">浇一点水</span>
-      </motion.button>
     </motion.section>
   );
 }
