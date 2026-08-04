@@ -12,7 +12,7 @@ import {
   MotionConfig,
   useMotionValue,
 } from "framer-motion";
-import { ExternalLink, Sun } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sun } from "lucide-react";
 import "./index.css";
 
 const siteIllustrations = import.meta.glob(
@@ -41,7 +41,6 @@ const treeAssets = {
   branchUpper: asset("tree/branch-upper.png"),
   branchLower: asset("tree/branch-lower.png"),
   leafRoot: asset("tree/leaf-root.png"),
-  leafBranches: asset("tree/leaf-branches.png"),
   leafVibes: asset("tree/leaf-vibes.png"),
   leafSmallA: asset("tree/leaf-small-a.png"),
   leafSmallB: asset("tree/leaf-small-b.png"),
@@ -56,7 +55,6 @@ const puffAssets = {
 const titleAssets = {
   about: asset("titles/about-me.png"),
   roots: asset("titles/my-roots.png"),
-  branches: asset("titles/my-branches.png"),
   vibes: asset("titles/my-vibes.png"),
 };
 
@@ -74,64 +72,50 @@ const content = {
   },
   roots: [
     {
-      label: "伦敦政治经济学院（LSE）",
-      degree: "应用经济学（区域经济方向）理学硕士",
-      highlight: "Distinction（优秀）",
-      time: "2023.09–2025.04",
+      label: "AI × 业务",
+      note: "把业务知识与 AI 能力沉淀成真正可用的工具。",
     },
     {
-      label: "英国南安普顿大学（UOS）",
-      degree: "经济与金融理学学士",
-      highlight: "GPA 3.98/4.00 · 专业前 3%",
-      time: "2021.09–2023.06",
+      label: "商业洞察",
+      note: "从数据和指标中定位问题，也寻找增长机会。",
     },
     {
-      label: "江西财经大学",
-      degree: "金融学（CFA 方向）经济学学士",
-      highlight: "GPA 92/100 · 年级前 1%",
-      time: "2019.09–2021.06",
-    },
-  ],
-  branches: [
-    {
-      company: "Shopee",
-      role: "商业智能分析师 · BI & Planning",
-      time: "2025.05–至今",
-      note:
-        "围绕供应链履约与 AI 落地，搭建全链路指标体系、对账与运营分析 Agent，并从 0 到 1 推动 AI Hub 与 Skill Factory 建设；出库时效提升 12%，未履约率（NFR）改善 18%。",
+      label: "供应链策略",
+      note: "关注履约效率、运营质量与全链路协同。",
     },
     {
-      company: "Kuaishou",
-      role: "风控策略分析实习生 · 商业化事业部",
-      time: "2024.10–2025.03",
-      note:
-        "从 0 到 1 搭建全产品线风险监控看板与 Python 群机器人，联动算法、产品和研发团队优化策略与模型，降低重点问题域漏放风险约 5%。",
+      label: "0 → 1",
+      note: "喜欢把模糊想法一步步推进成可落地的产品。",
     },
     {
-      company: "SHEIN",
-      role: "商业分析（PMO）实习生 · 品类运营中心",
-      time: "2024.07–2024.10",
-      note:
-        "参与中东插画师 IP 联名项目全周期管理并提供经营分析，活动 GMV 超出预期 200%+；推动频道“趋势”功能优化，带动品类整体曝光提升约 3%。",
+      label: "跨团队协作",
+      note: "连接业务、产品、算法和研发，让方案顺利发生。",
+    },
+    {
+      label: "持续好奇",
+      note: "持续探索 AI、设计和更高效的工作方式。",
     },
   ],
   vibes: [
     {
-      title: "【项目名】",
-      desc: "【一句话简介】",
-      href: "#",
+      title: "AI Hub & Skill Factory",
+      category: "AI PRODUCT",
+      desc: "从 0 到 1 搭建面向业务的 AI 工作台与 Skill 生产流程，让团队经验能够被沉淀、复用和持续迭代。",
+      tags: ["AI 落地", "知识沉淀", "0 → 1"],
       cover: vibeCovers[0],
     },
     {
-      title: "【项目名】",
-      desc: "【一句话简介】",
-      href: "#",
+      title: "供应链履约分析 Agent",
+      category: "DATA AGENT",
+      desc: "将对账、异常定位与指标归因串联成自动化分析链路，帮助业务更快找到履约问题和行动方向。",
+      tags: ["供应链", "商业智能", "自动化"],
       cover: vibeCovers[1],
     },
     {
-      title: "【项目名】",
-      desc: "【一句话简介】",
-      href: "#",
+      title: "风险监控与策略优化",
+      category: "RISK INSIGHT",
+      desc: "通过监控看板与 Python 机器人连接风险发现、策略分析和团队协作，缩短从异常出现到响应处理的路径。",
+      tags: ["风险策略", "数据监控", "协同"],
       cover: vibeCovers[2],
     },
   ],
@@ -442,20 +426,19 @@ function ProfilePage() {
 
     const contentStack = garden.querySelector(".content-stack");
     const rows = [...garden.querySelectorAll(".section-row")];
-    if (!contentStack || rows.length < 3) return undefined;
+    if (!contentStack || rows.length < 2) return undefined;
 
     const syncTreeAnchors = () => {
       const gardenTop = garden.getBoundingClientRect().top;
-      const middleRowTop = rows[1].getBoundingClientRect().top - gardenTop;
-      const lowerRowTop = rows[2].getBoundingClientRect().top - gardenTop;
+      const vibesRowTop = rows[1].getBoundingClientRect().top - gardenTop;
 
       garden.style.setProperty(
         "--middle-branch-top",
-        `${Math.max(150, middleRowTop - 44)}px`,
+        `${Math.max(180, vibesRowTop - 70)}px`,
       );
       garden.style.setProperty(
         "--lower-branch-top",
-        `${Math.max(520, lowerRowTop + 17)}px`,
+        `${Math.max(620, vibesRowTop + 300)}px`,
       );
     };
 
@@ -487,43 +470,22 @@ function ProfilePage() {
             connectorLeaf={treeAssets.leafRoot}
             connectorDelay={1.18}
           >
-            <dl className="roots-list">
+            <div className="roots-keywords">
               {content.roots.map((item, index) => (
-                <div className="roots-item" key={item.label}>
-                  <span className="root-knot" aria-hidden="true">
+                <motion.article
+                  className="root-keyword"
+                  key={item.label}
+                  whileHover={{ y: -4, rotate: index % 2 === 0 ? -1 : 1 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                >
+                  <span className="keyword-index" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <dt>
-                      <span>{item.label}</span>
-                      <time>{item.time}</time>
-                    </dt>
-                    <dd>
-                      <p className="root-degree">{item.degree}</p>
-                      <p className="root-highlight">{item.highlight}</p>
-                    </dd>
+                    <h3>{item.label}</h3>
+                    <p>{item.note}</p>
                   </div>
-                </div>
-              ))}
-            </dl>
-          </ContentSection>
-
-          <ContentSection
-            title={titleAssets.branches}
-            titleLabel="My Branches"
-            connectorLeaf={treeAssets.leafBranches}
-            connectorDelay={1.3}
-          >
-            <div className="branches-list">
-              {content.branches.map((item, index) => (
-                <article className="branch-entry" key={`${item.company}-${index}`}>
-                  <div>
-                    <h3>{item.company}</h3>
-                    <p>{item.role}</p>
-                  </div>
-                  <time>{item.time}</time>
-                  <p className="branch-note">{item.note}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </ContentSection>
@@ -532,24 +494,116 @@ function ProfilePage() {
             title={titleAssets.vibes}
             titleLabel="My Vibes"
             connectorLeaf={treeAssets.leafVibes}
-            connectorDelay={1.42}
+            connectorDelay={1.3}
           >
-            <div className="vibes-grid">
-              {content.vibes.map((item, index) => (
-                <a className="vibe-card" href={item.href} key={`${item.title}-${index}`}>
-                  <img src={item.cover} alt="" draggable="false" />
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
-                  <ExternalLink size={17} aria-hidden="true" />
-                </a>
-              ))}
-            </div>
+            <VibesShowcase />
           </ContentSection>
         </div>
       </div>
     </motion.section>
+  );
+}
+
+function VibesShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeItem = content.vibes[activeIndex];
+  const total = content.vibes.length;
+  const move = (direction) => {
+    setActiveIndex((current) => (current + direction + total) % total);
+  };
+
+  const offsetFor = (index) => {
+    let offset = index - activeIndex;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+    return offset;
+  };
+
+  return (
+    <div className="vibes-showcase">
+      <div className="vibes-carousel" aria-label="项目卡片轮播">
+        <button
+          className="carousel-arrow previous"
+          type="button"
+          onClick={() => move(-1)}
+          aria-label="上一个项目"
+        >
+          <ChevronLeft size={21} strokeWidth={2.6} />
+        </button>
+
+        <div className="vibes-deck">
+          {content.vibes.map((item, index) => {
+            const offset = offsetFor(index);
+            const isActive = offset === 0;
+
+            return (
+              <motion.button
+                className={`deck-card${isActive ? " is-active" : ""}`}
+                type="button"
+                key={item.title}
+                onClick={() => setActiveIndex(index)}
+                aria-label={`查看项目：${item.title}`}
+                animate={{
+                  x: offset * 188,
+                  y: Math.abs(offset) * 16,
+                  scale: isActive ? 1 : 0.84,
+                  rotate: offset * 5,
+                  opacity: Math.abs(offset) > 1 ? 0 : 1,
+                  zIndex: isActive ? 3 : 2 - Math.abs(offset),
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              >
+                <img src={item.cover} alt="" draggable="false" />
+                <span>{item.category}</span>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        <button
+          className="carousel-arrow next"
+          type="button"
+          onClick={() => move(1)}
+          aria-label="下一个项目"
+        >
+          <ChevronRight size={21} strokeWidth={2.6} />
+        </button>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.article
+          className="project-brief"
+          key={activeItem.title}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.24, ease: "easeOut" }}
+        >
+          <p className="project-eyebrow">
+            PROJECT {String(activeIndex + 1).padStart(2, "0")}
+          </p>
+          <h3>{activeItem.title}</h3>
+          <p className="project-description">{activeItem.desc}</p>
+          <div className="project-tags" aria-label="项目标签">
+            {activeItem.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+        </motion.article>
+      </AnimatePresence>
+
+      <div className="carousel-dots" aria-label="选择项目">
+        {content.vibes.map((item, index) => (
+          <button
+            type="button"
+            className={index === activeIndex ? "is-active" : ""}
+            key={item.title}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`切换到${item.title}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
