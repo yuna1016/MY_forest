@@ -495,7 +495,17 @@ img {
 }
 
 .section-row:last-child .content-block {
+  border-top: 0;
   border-bottom: 2px solid #111111;
+}
+
+.section-row:last-child .content-block::before {
+  position: absolute;
+  top: 0;
+  right: 52px;
+  left: 52px;
+  border-top: 3px solid #111111;
+  content: "";
 }
 
 .content-block > .title-image {
@@ -574,6 +584,13 @@ img {
   font-size: 21px;
   padding-right: 24px;
   padding-left: 24px;
+}
+
+.root-tag.hero {
+  min-height: 62px;
+  font-size: 22px;
+  padding-right: 32px;
+  padding-left: 32px;
 }
 
 .root-tag.wide {
@@ -904,6 +921,12 @@ img {
     padding: 9px 14px;
   }
 
+  .root-tag.hero {
+    min-height: 50px;
+    font-size: 17px;
+    padding: 11px 18px;
+  }
+
   .root-tag.wide {
     padding-right: 16px;
     padding-left: 16px;
@@ -933,6 +956,11 @@ img {
   .project-brief {
     margin-right: 4px;
     margin-left: 4px;
+  }
+
+  .section-row:last-child .content-block::before {
+    right: 4px;
+    left: 4px;
   }
 
   .project-brief h3 {

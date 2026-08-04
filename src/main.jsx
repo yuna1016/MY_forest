@@ -73,7 +73,6 @@ const content = {
   roots: [
     { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
     { label: "英国南安普顿大学 · 理学学士", tone: "peach", emphasis: "wide" },
-    { label: "Shopee · 国际化商业分析师", tone: "orange", emphasis: "strong" },
     {
       label: "快手 · 风险策略分析师",
       detail: "*实习",
@@ -85,6 +84,12 @@ const content = {
       detail: "*实习",
       tone: "peach",
       emphasis: "wide",
+    },
+    {
+      label: "Shopee · 国际化商业分析师",
+      detail: "*在职",
+      tone: "orange",
+      emphasis: "hero",
     },
   ],
   vibes: [
