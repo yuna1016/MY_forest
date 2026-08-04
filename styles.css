@@ -1,0 +1,737 @@
+:root {
+  --ink: #111111;
+  --paper: #fbfff9;
+  --white: #ffffff;
+  --soft-green: #d9f0dd;
+  --tea-green: #69b982;
+  --coral: #f06a49;
+  --blue: #4c8ed9;
+  --pink: #f4b6c7;
+  --wine: #6b2436;
+  --muted: #646464;
+  --line: 2px solid var(--ink);
+  --marker-line: 5px solid var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 72px;
+  padding: 18px 5vw;
+  background: rgba(251, 255, 249, 0.9);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.brand,
+.nav-links,
+.hero-actions {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 32px;
+  border: var(--line);
+  border-radius: 50%;
+  background: var(--pink);
+  font-family: "Comic Sans MS", "Bradley Hand", cursive;
+  font-size: 14px;
+  transform: rotate(-5deg);
+}
+
+.nav-links {
+  gap: 22px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav-links a {
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+  border-bottom-color: var(--ink);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(420px, 1.1fr);
+  gap: 48px;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+  padding: 40px 5vw 76px;
+  overflow: hidden;
+}
+
+.hero-copy {
+  max-width: 590px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--coral);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0;
+  max-width: 560px;
+  font-family: "Comic Sans MS", "Bradley Hand", "PingFang SC", cursive;
+  font-size: 64px;
+  line-height: 1.03;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-wrap: balance;
+  transform: rotate(-1.2deg);
+}
+
+.hero-text {
+  max-width: 500px;
+  margin: 24px 0 0;
+  color: #303030;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  height: 44px;
+  padding: 0 18px;
+  border: var(--line);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.button.primary {
+  background: var(--soft-green);
+}
+
+.button.ghost {
+  background: var(--white);
+}
+
+.hero-stage {
+  position: relative;
+  min-height: 430px;
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 2% 0 5% 8%;
+  z-index: -1;
+  background: var(--white);
+  border-radius: 46% 54% 51% 49% / 47% 43% 57% 53%;
+  box-shadow: 0 20px 60px rgba(17, 17, 17, 0.05);
+  transform: rotate(-1.6deg);
+}
+
+.scribble-path {
+  width: 100%;
+  height: 100%;
+  min-height: 430px;
+  overflow: visible;
+  transform: translate(var(--tilt-x, 0), var(--tilt-y, 0));
+  transition: transform 220ms ease;
+}
+
+.label {
+  position: absolute;
+  z-index: 3;
+  padding: 6px 12px 8px;
+  border: 3px solid var(--ink);
+  border-radius: 48% 52% 44% 56% / 58% 43% 57% 42%;
+  background: var(--white);
+  font-family: "Comic Sans MS", "Bradley Hand", "PingFang SC", cursive;
+  font-size: 16px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.poster-title {
+  position: absolute;
+  top: 30px;
+  left: 3%;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2px 11px;
+  align-items: start;
+  font-family: "Comic Sans MS", "Bradley Hand", "PingFang SC", cursive;
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 900;
+  line-height: 0.92;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+
+.poster-title span {
+  display: block;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  color: var(--ink);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1px var(--ink);
+  text-shadow:
+    2px 0 0 var(--ink),
+    -1px 1px 0 var(--ink),
+    0 3px 0 rgba(17, 17, 17, 0.08);
+}
+
+.poster-title span:nth-child(1) {
+  transform: translateY(-6px) rotate(3deg);
+}
+
+.poster-title span:nth-child(2) {
+  transform: translateY(19px) rotate(-5deg);
+}
+
+.label-fresh {
+  top: 24px;
+  right: 8%;
+  color: var(--tea-green);
+  transform: rotate(-8deg);
+}
+
+.label-note {
+  left: 5%;
+  bottom: 62px;
+  color: var(--blue);
+  transform: rotate(7deg);
+}
+
+.puff-runner {
+  position: absolute;
+  left: 4%;
+  top: 18px;
+  z-index: 4;
+  width: 152px;
+  height: 164px;
+  transform-origin: center bottom;
+  animation: puffTravel 8.5s ease-in-out infinite;
+}
+
+.puff {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter:
+    drop-shadow(5px 8px 0 rgba(17, 17, 17, 0.08))
+    drop-shadow(-2px 1px 0 rgba(17, 17, 17, 0.03));
+}
+
+.puff path,
+.puff circle {
+  vector-effect: non-scaling-stroke;
+}
+
+.puff-body path,
+.puff-head .face,
+.puff-feet path {
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.puff-body path {
+  fill: none;
+}
+
+.puff-body path:first-child {
+  fill: #fffaf0;
+}
+
+.puff-head .cap {
+  fill: #fff9ee;
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linejoin: round;
+}
+
+.puff-head .cap-brim {
+  fill: #fffaf0;
+  stroke: var(--ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.puff-head .cap-patch {
+  fill: var(--pink);
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.puff-head .hair {
+  fill: var(--wine);
+  stroke: var(--ink);
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.puff-head text {
+  font-family: "Comic Sans MS", "Bradley Hand", cursive;
+  font-size: 12px;
+  font-weight: 900;
+  fill: var(--ink);
+}
+
+.puff-head circle:not(.cheek) {
+  fill: var(--ink);
+}
+
+.puff-head .cheek {
+  fill: #f7b3be;
+  stroke: none;
+  opacity: 0.8;
+}
+
+.puff-head path:last-of-type {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.puff-arm path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.puff-arm circle {
+  fill: #fffaf0;
+  stroke: var(--ink);
+  stroke-width: 6;
+}
+
+.front-arm {
+  animation: waveArm 1.5s ease-in-out infinite;
+  transform-origin: 108px 94px;
+}
+
+.back-arm {
+  animation: backArm 1.5s ease-in-out infinite;
+  transform-origin: 50px 94px;
+}
+
+.heart {
+  fill: var(--coral) !important;
+  stroke-width: 5 !important;
+}
+
+.puff-shadow ellipse {
+  fill: rgba(17, 17, 17, 0.12);
+}
+
+.puff-color-wash .wash {
+  stroke: none;
+}
+
+.hoodie-wash {
+  fill: #fff1de;
+}
+
+.face-wash {
+  fill: #ffe6da;
+  opacity: 0.75;
+}
+
+.puff-prop path {
+  fill: #fffdf8;
+  stroke: var(--ink);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.puff-prop .tea-pour {
+  fill: none;
+  stroke: var(--tea-green);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 8 7;
+}
+
+.puff-prop .tea-drop {
+  fill: var(--tea-green);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.puff-sketch {
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+}
+
+.puff-sketch path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tea-cup {
+  animation: cupBob 3.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.tea-cup path:first-of-type {
+  fill: #fffef8;
+}
+
+.tea-cup path:nth-of-type(2) {
+  stroke-width: 7;
+}
+
+.tea-cup path:nth-of-type(3),
+.tea-cup path:nth-of-type(4) {
+  stroke-linecap: round;
+  stroke-dasharray: 56 10;
+}
+
+.stage-ground {
+  stroke-width: 5;
+  opacity: 0.9;
+}
+
+.section {
+  padding: 76px 5vw;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.section h2 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.18;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work-card {
+  min-height: 230px;
+  padding: 24px;
+  border: var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.work-card:nth-child(2) {
+  background: #f8fbff;
+}
+
+.work-card:nth-child(3) {
+  background: #fff7f4;
+}
+
+.work-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 36px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  color: var(--coral);
+  font-weight: 900;
+  transform: rotate(-7deg);
+}
+
+.work-card h3 {
+  margin: 32px 0 12px;
+  font-size: 22px;
+}
+
+.work-card p,
+.notes-copy p,
+.about p {
+  margin: 0;
+  color: #343434;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.notes-band {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.65fr) minmax(300px, 1fr);
+  gap: 40px;
+  align-items: center;
+  background: var(--white);
+  border-block: var(--line);
+}
+
+.note-visual {
+  position: relative;
+  min-height: 260px;
+}
+
+.paper-stack {
+  position: absolute;
+  inset: 34px 12% auto;
+  height: 172px;
+  border: var(--line);
+  background: var(--soft-green);
+}
+
+.paper-stack.one {
+  transform: rotate(-8deg);
+  background: #f8fbff;
+}
+
+.paper-stack.two {
+  transform: rotate(7deg);
+  background: #fff7f4;
+}
+
+.main-paper {
+  display: grid;
+  place-items: center;
+  min-width: 220px;
+  background: var(--white);
+  transform: rotate(-1deg);
+}
+
+.main-paper span {
+  font-family: "Comic Sans MS", "Bradley Hand", "PingFang SC", cursive;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.6fr) minmax(300px, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+
+@keyframes puffTravel {
+  0% {
+    transform: translate(26px, 192px) rotate(-7deg) scale(1.02);
+  }
+  24% {
+    transform: translate(122px, 137px) rotate(4deg) scale(0.98);
+  }
+  49% {
+    transform: translate(260px, 97px) rotate(-4deg) scale(1.03);
+  }
+  74% {
+    transform: translate(380px, 66px) rotate(8deg) scale(0.99);
+  }
+  100% {
+    transform: translate(26px, 192px) rotate(-7deg) scale(1.02);
+  }
+}
+
+@keyframes waveArm {
+  0%,
+  100% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-13deg);
+  }
+}
+
+@keyframes backArm {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes cupBob {
+  0%,
+  100% {
+    transform: translate(410px, 150px);
+  }
+  50% {
+    transform: translate(410px, 142px);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 34px;
+  }
+
+  h1 {
+    font-size: 46px;
+  }
+
+  .hero-stage {
+    min-height: 360px;
+  }
+
+  .scribble-path {
+    min-height: 360px;
+  }
+
+  .puff-runner {
+    width: 104px;
+    height: 116px;
+  }
+
+  .work-grid,
+  .notes-band,
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .section h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .hero-stage {
+    min-height: 315px;
+  }
+
+  .scribble-path {
+    min-height: 315px;
+  }
+
+  .puff-runner {
+    width: 88px;
+    height: 98px;
+  }
+
+  @keyframes puffTravel {
+    0% {
+      transform: translate(0, 158px) rotate(-6deg);
+    }
+    24% {
+      transform: translate(54px, 108px) rotate(5deg);
+    }
+    49% {
+      transform: translate(138px, 80px) rotate(-3deg);
+    }
+    74% {
+      transform: translate(218px, 56px) rotate(7deg);
+    }
+    100% {
+      transform: translate(0, 158px) rotate(-6deg);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

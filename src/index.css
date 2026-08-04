@@ -1,0 +1,924 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #111111;
+  background: #fffdf7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #fffdf7;
+  font-family:
+    "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "KaiTi", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  user-select: none;
+}
+
+.intro-screen {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  padding: 32px;
+  cursor: pointer;
+}
+
+.intro-screen.is-watering {
+  cursor: default;
+}
+
+.intro-screen::before {
+  position: absolute;
+  inset: 11% auto auto 8%;
+  width: 160px;
+  height: 24px;
+  border: 4px solid #111111;
+  border-radius: 8px;
+  background: #dff1d9;
+  content: "";
+  transform: rotate(-7deg);
+}
+
+.intro-screen::after {
+  position: absolute;
+  right: 9%;
+  bottom: 13%;
+  width: 118px;
+  height: 18px;
+  border: 4px solid #111111;
+  border-radius: 8px;
+  background: #ffe1c6;
+  content: "";
+  transform: rotate(6deg);
+}
+
+.skip-button {
+  position: absolute;
+  top: 28px;
+  right: 34px;
+  z-index: 5;
+  border: 0;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+
+.intro-sun {
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  z-index: 2;
+  display: grid;
+  width: 94px;
+  height: 94px;
+  place-items: center;
+  color: #111111;
+  transform-origin: center;
+}
+
+.intro-sun circle {
+  fill: #ffd96a;
+}
+
+.intro-center {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+
+.intro-illustration {
+  position: relative;
+  width: min(680px, 88vw);
+  height: 480px;
+  pointer-events: none;
+}
+
+.intro-land {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  z-index: 1;
+  width: 395px;
+  transform: translateX(-50%);
+}
+
+.intro-seedling {
+  position: absolute;
+  left: calc(50% - 86px);
+  bottom: 128px;
+  z-index: 2;
+  width: 176px;
+  transform-origin: center bottom;
+}
+
+.intro-can {
+  position: absolute;
+  right: 42px;
+  top: 122px;
+  z-index: 4;
+  width: 208px;
+  transform-origin: 18% 50%;
+}
+
+.intro-water {
+  position: absolute;
+  right: 205px;
+  top: 77px;
+  z-index: 3;
+  width: 180px;
+  filter: saturate(1.5) contrast(1.18);
+  transform-origin: 94% 63%;
+}
+
+.intro-grown-tree {
+  position: absolute;
+  left: calc(50% - 115px);
+  bottom: 118px;
+  z-index: 2;
+  width: 230px;
+  height: 320px;
+  transform-origin: center bottom;
+}
+
+.intro-grown-tree img {
+  position: absolute;
+  display: block;
+}
+
+.intro-grow-trunk {
+  left: 83px;
+  bottom: 0;
+  width: 70px;
+  height: 260px;
+  object-fit: contain;
+}
+
+.intro-grow-branch {
+  left: 114px;
+  top: 102px;
+  width: 178px;
+}
+
+.intro-grow-leaf {
+  width: 64px;
+}
+
+.intro-grow-leaf.one {
+  left: 224px;
+  top: 86px;
+}
+
+.intro-grow-leaf.two {
+  left: 154px;
+  top: 62px;
+}
+
+.water-button {
+  position: absolute;
+  top: 57%;
+  left: clamp(34px, 7vw, 112px);
+  z-index: 4;
+  display: inline-flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family:
+    "LXGW WenKai", "霞鹜文楷", "Kaiti SC", "KaiTi", "PingFang SC",
+    sans-serif;
+  font-size: clamp(32px, 3.2vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  padding: 7px 4px;
+  transform-origin: left center;
+}
+
+.water-button::after {
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  left: 52px;
+  height: 4px;
+  background: #f28452;
+  content: "";
+  transform: rotate(-2deg);
+}
+
+.water-icon {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  place-items: center;
+  border: 3px solid #111111;
+  border-radius: 50%;
+  background: #e7f5e2;
+}
+
+.water-button:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.profile-page {
+  width: min(1260px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+.about-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  gap: 24px;
+  align-items: center;
+  min-height: 214px;
+  border: 3px solid #111111;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 8% 28%, rgba(242, 132, 82, 0.22) 0 8px, transparent 9px),
+    #eef8e9;
+  box-shadow: 3px 4px 0 #111111;
+  padding: 18px 22px 20px 30px;
+}
+
+.about-copy {
+  min-width: 0;
+}
+
+.title-image {
+  display: block;
+  width: 310px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 8px -12px;
+  object-fit: contain;
+}
+
+.about-title {
+  width: 335px;
+  margin-bottom: 0;
+}
+
+.about-text-grid {
+  display: grid;
+  gap: 7px;
+  max-width: 760px;
+}
+
+.about-name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.about-line,
+.about-detail {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.about-line {
+  color: #1b4f2f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.about-detail {
+  max-width: 680px;
+  color: #383838;
+  font-size: 15px;
+}
+
+.about-detail-wide {
+  grid-column: 1;
+}
+
+.avatar-frame {
+  display: grid;
+  width: 146px;
+  height: 146px;
+  place-items: center;
+  overflow: hidden;
+  border: 3px solid #111111;
+  border-radius: 8px;
+  background: #fffdf7;
+  transform: rotate(2deg);
+}
+
+.avatar-frame img {
+  width: 132px;
+  transform: translateY(12px);
+}
+
+.garden-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.tree-column {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 980px;
+  pointer-events: none;
+}
+
+.tree-stage {
+  position: relative;
+  width: 320px;
+  height: 100%;
+  min-height: 980px;
+  overflow: visible;
+}
+
+.tree-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.tree-part {
+  position: absolute;
+  display: block;
+}
+
+.trunk {
+  left: 12px;
+  top: 0;
+  width: 268px;
+  height: 100%;
+  min-height: 930px;
+  object-fit: fill;
+  transform-origin: center bottom;
+}
+
+.branch {
+  z-index: 2;
+  transform-origin: 5% 52%;
+}
+
+.puff-branch-base {
+  left: 122px;
+  top: var(--middle-branch-top, 246px);
+  z-index: 2;
+  width: 238px;
+  clip-path: polygon(0 64%, 100% 48%, 100% 91%, 0 91%);
+  transform-origin: 5% 76%;
+}
+
+.branch-upper {
+  left: 138px;
+  top: 20px;
+  width: 345px;
+  transform: rotate(-6deg);
+}
+
+.branch-lower {
+  left: 136px;
+  top: var(--lower-branch-top, 720px);
+  width: 372px;
+  transform: rotate(3deg);
+}
+
+.tree-leaf,
+.puff-sitting {
+  position: absolute;
+  z-index: 4;
+}
+
+.tree-leaf img {
+  display: block;
+  width: 100%;
+}
+
+.leaf-small-1 {
+  left: 250px;
+  top: calc(var(--middle-branch-top, 246px) + 254px);
+  width: 58px;
+}
+
+.leaf-small-2 {
+  left: 170px;
+  top: calc(var(--lower-branch-top, 720px) + 106px);
+  width: 56px;
+}
+
+.puff-sitting {
+  left: 122px;
+  top: var(--middle-branch-top, 246px);
+  width: 238px;
+}
+
+.mobile-tree-strip {
+  display: none;
+}
+
+.content-stack {
+  display: grid;
+  gap: 30px;
+  min-width: 0;
+}
+
+.section-row {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
+  align-items: start;
+  min-height: 238px;
+}
+
+.connector {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  color: #111111;
+  pointer-events: none;
+  transform-origin: right center;
+}
+
+.connector-drift {
+  position: relative;
+  height: 120px;
+  transform-origin: right center;
+}
+
+.connector-drift img {
+  position: absolute;
+  left: 10px;
+  top: 2px;
+  z-index: 2;
+  width: 94px;
+}
+
+.connector-drift svg {
+  position: absolute;
+  left: 42px;
+  top: 45px;
+  width: 134px;
+  height: 54px;
+  overflow: visible;
+}
+
+.content-block {
+  position: relative;
+  border-top: 3px solid #111111;
+  border-bottom: 2px dashed rgba(17, 17, 17, 0.24);
+  background: transparent;
+  padding: 25px 22px 34px;
+}
+
+.content-block > .title-image {
+  margin-left: 0;
+}
+
+.roots-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin: 20px 0 0;
+  padding: 9px 0 2px;
+}
+
+.roots-list::before {
+  position: absolute;
+  top: 25px;
+  right: 32px;
+  left: 32px;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #111111 0 11px,
+    transparent 11px 19px
+  );
+  content: "";
+  opacity: 0.72;
+  transform: rotate(-0.8deg);
+}
+
+.roots-item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 76px;
+  background: transparent;
+}
+
+.root-knot {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 2px solid #111111;
+  border-radius: 50%;
+  background: #e8f5e3;
+  font-size: 12px;
+  font-weight: 900;
+  transform: rotate(-5deg);
+}
+
+.roots-item:nth-child(2) .root-knot {
+  background: #fff0df;
+  transform: rotate(4deg);
+}
+
+.roots-item:nth-child(3) .root-knot {
+  background: #f6f3d7;
+  transform: rotate(-2deg);
+}
+
+.roots-item dt {
+  margin-bottom: 5px;
+  color: #4b7e41;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.roots-item dd {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.branches-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.branch-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: start;
+  border-top: 3px dashed rgba(17, 17, 17, 0.34);
+  padding-top: 14px;
+}
+
+.branch-entry:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.branch-entry h3,
+.branch-entry p {
+  margin: 0;
+}
+
+.branch-entry h3 {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.branch-entry time {
+  color: #cf643c;
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.branch-note {
+  grid-column: 1 / -1;
+  color: #3c3c3c;
+  line-height: 1.7;
+}
+
+.vibes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.vibe-card {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  min-height: 250px;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  background: #fffdf7;
+  padding: 12px;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.vibe-card:hover {
+  background: #f6fff1;
+  transform: translateY(-2px);
+}
+
+.vibe-card img {
+  aspect-ratio: 1.35;
+  width: 100%;
+  border: 2px solid #111111;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #ffffff;
+}
+
+.vibe-card h3,
+.vibe-card p {
+  margin: 0;
+}
+
+.vibe-card h3 {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.vibe-card p {
+  color: #464646;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.vibe-card svg {
+  position: absolute;
+  right: 12px;
+  bottom: 13px;
+}
+
+@media (max-width: 980px) {
+  .profile-page {
+    width: min(100% - 28px, 760px);
+    padding-top: 22px;
+  }
+
+  .about-banner {
+    grid-template-columns: minmax(0, 1fr) 126px;
+    padding: 16px 18px;
+  }
+
+  .avatar-frame {
+    width: 112px;
+    height: 112px;
+  }
+
+  .avatar-frame img {
+    width: 102px;
+  }
+
+  .garden-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tree-column {
+    position: relative;
+    top: auto;
+    height: 150px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .tree-stage {
+    display: none;
+  }
+
+  .mobile-tree-strip {
+    position: relative;
+    display: block;
+    height: 146px;
+    overflow: hidden;
+    border-top: 2px dashed rgba(17, 17, 17, 0.42);
+    border-bottom: 2px dashed rgba(17, 17, 17, 0.42);
+    background: transparent;
+  }
+
+  .mobile-puff {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    width: 244px;
+    transform: translateX(-50%);
+  }
+
+  .section-row {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .connector {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .intro-screen {
+    padding: 22px;
+  }
+
+  .skip-button {
+    top: 18px;
+    right: 20px;
+  }
+
+  .intro-sun {
+    top: 9%;
+    right: 8%;
+    width: 72px;
+    height: 72px;
+  }
+
+  .intro-sun svg {
+    width: 68px;
+    height: 68px;
+  }
+
+  .intro-illustration {
+    width: min(460px, 94vw);
+    height: 390px;
+  }
+
+  .intro-can {
+    right: -4px;
+    top: 112px;
+    width: 152px;
+  }
+
+  .intro-water {
+    right: 115px;
+    top: 79px;
+    width: 132px;
+  }
+
+  .intro-land {
+    bottom: 54px;
+    width: 330px;
+  }
+
+  .intro-seedling {
+    left: calc(50% - 64px);
+    bottom: 112px;
+    width: 132px;
+  }
+
+  .intro-grown-tree {
+    left: calc(50% - 88px);
+    bottom: 100px;
+    width: 176px;
+    height: 278px;
+  }
+
+  .intro-grow-trunk {
+    left: 62px;
+    height: 218px;
+  }
+
+  .intro-grow-branch {
+    left: 92px;
+    top: 92px;
+    width: 142px;
+  }
+
+  .intro-grow-leaf.one {
+    left: 174px;
+    top: 78px;
+  }
+
+  .intro-grow-leaf.two {
+    left: 116px;
+    top: 58px;
+  }
+
+  .water-button {
+    top: auto;
+    right: auto;
+    bottom: 12%;
+    left: 24px;
+    min-height: 52px;
+    gap: 9px;
+    font-size: 31px;
+  }
+
+  .water-icon {
+    width: 39px;
+    height: 39px;
+  }
+
+  .water-button::after {
+    left: 46px;
+  }
+
+  .about-banner {
+    grid-template-columns: minmax(0, 1fr) 90px;
+    gap: 12px;
+    min-height: 0;
+    padding: 15px 16px 17px;
+  }
+
+  .about-title {
+    width: 230px;
+    margin-left: -8px;
+  }
+
+  .about-detail-wide {
+    grid-column: 1 / -1;
+  }
+
+  .avatar-frame {
+    width: 86px;
+    height: 86px;
+    justify-self: end;
+  }
+
+  .avatar-frame img {
+    width: 80px;
+    transform: translateY(7px);
+  }
+
+  .about-name {
+    font-size: 24px;
+  }
+
+  .about-line {
+    font-size: 16px;
+  }
+
+  .vibes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roots-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 4px 0 0;
+  }
+
+  .roots-list::before {
+    top: 20px;
+    bottom: 24px;
+    left: 18px;
+    width: 3px;
+    height: auto;
+    background: repeating-linear-gradient(
+      180deg,
+      #111111 0 10px,
+      transparent 10px 18px
+    );
+    transform: rotate(0.7deg);
+  }
+
+  .roots-item {
+    grid-template-columns: 44px minmax(0, 1fr);
+    min-height: 72px;
+    padding-bottom: 14px;
+  }
+
+  .content-block {
+    padding: 21px 20px 24px;
+  }
+
+  .branch-entry {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-entry time {
+    white-space: normal;
+  }
+}
