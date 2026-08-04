@@ -71,14 +71,12 @@ const content = {
       "这里可以放一段 2-3 句的自我介绍：你正在关注什么、擅长什么、喜欢怎样把想法落到真实作品里。",
   },
   roots: [
-    { label: "伦敦政治经济学院", tone: "sage", emphasis: "wide" },
-    { label: "南安普敦大学", tone: "peach", emphasis: "regular" },
-    { label: "Shopee", tone: "orange", emphasis: "strong" },
-    { label: "快手", tone: "yellow", emphasis: "regular" },
-    { label: "风险策略分析师", tone: "peach", emphasis: "wide" },
-    { label: "国际化商业分析师", tone: "sage", emphasis: "wide" },
-    { label: "AI × 业务", tone: "yellow", emphasis: "strong" },
-    { label: "供应链策略", tone: "orange", emphasis: "regular" },
+    { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
+    { label: "英国南安普顿大学 · 理学学士", tone: "peach", emphasis: "wide" },
+    { label: "Shopee · 国际化商业分析师", tone: "orange", emphasis: "strong" },
+    { label: "快手 · 风险策略分析实习生", tone: "yellow", emphasis: "wide" },
+    { label: "SHEIN · 商业分析（PMO）实习生", tone: "peach", emphasis: "wide" },
+    { label: "AI × 业务", tone: "sage", emphasis: "strong" },
   ],
   vibes: [
     {

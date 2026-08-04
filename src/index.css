@@ -494,6 +494,10 @@ img {
   padding: 25px 22px 34px;
 }
 
+.section-row:last-child .content-block {
+  border-bottom: 2px solid #111111;
+}
+
 .content-block > .title-image {
   margin-left: 0;
 }
@@ -663,9 +667,8 @@ img {
   position: relative;
   min-height: 190px;
   margin: 8px 52px 0;
-  border-top: 2px solid #111111;
   border-bottom: 2px dashed rgba(17, 17, 17, 0.28);
-  padding: 20px 6px 18px;
+  padding: 22px 6px 18px;
   text-align: center;
 }
 
