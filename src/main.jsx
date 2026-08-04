@@ -71,30 +71,14 @@ const content = {
       "这里可以放一段 2-3 句的自我介绍：你正在关注什么、擅长什么、喜欢怎样把想法落到真实作品里。",
   },
   roots: [
-    {
-      label: "AI × 业务",
-      note: "把业务知识与 AI 能力沉淀成真正可用的工具。",
-    },
-    {
-      label: "商业洞察",
-      note: "从数据和指标中定位问题，也寻找增长机会。",
-    },
-    {
-      label: "供应链策略",
-      note: "关注履约效率、运营质量与全链路协同。",
-    },
-    {
-      label: "0 → 1",
-      note: "喜欢把模糊想法一步步推进成可落地的产品。",
-    },
-    {
-      label: "跨团队协作",
-      note: "连接业务、产品、算法和研发，让方案顺利发生。",
-    },
-    {
-      label: "持续好奇",
-      note: "持续探索 AI、设计和更高效的工作方式。",
-    },
+    { label: "伦敦政治经济学院", tone: "sage", emphasis: "wide" },
+    { label: "南安普敦大学", tone: "peach", emphasis: "regular" },
+    { label: "Shopee", tone: "orange", emphasis: "strong" },
+    { label: "快手", tone: "yellow", emphasis: "regular" },
+    { label: "风险策略分析师", tone: "peach", emphasis: "wide" },
+    { label: "国际化商业分析师", tone: "sage", emphasis: "wide" },
+    { label: "AI × 业务", tone: "yellow", emphasis: "strong" },
+    { label: "供应链策略", tone: "orange", emphasis: "regular" },
   ],
   vibes: [
     {
@@ -470,22 +454,18 @@ function ProfilePage() {
             connectorLeaf={treeAssets.leafRoot}
             connectorDelay={1.18}
           >
-            <div className="roots-keywords">
+            <div className="roots-tag-cloud" aria-label="个人关键词">
               {content.roots.map((item, index) => (
-                <motion.article
-                  className="root-keyword"
+                <motion.span
+                  className={`root-tag ${item.tone} ${item.emphasis}`}
                   key={item.label}
-                  whileHover={{ y: -4, rotate: index % 2 === 0 ? -1 : 1 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  initial={{ opacity: 0, y: 12, rotate: index % 2 === 0 ? -2 : 2 }}
+                  animate={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1 : 1 }}
+                  whileHover={{ y: -5, rotate: 0, scale: 1.04 }}
+                  transition={{ duration: 0.26, delay: index * 0.05, ease: "easeOut" }}
                 >
-                  <span className="keyword-index" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3>{item.label}</h3>
-                    <p>{item.note}</p>
-                  </div>
-                </motion.article>
+                  {item.label}
+                </motion.span>
               ))}
             </div>
           </ContentSection>
