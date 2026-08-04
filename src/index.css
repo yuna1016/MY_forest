@@ -57,31 +57,6 @@ img {
   cursor: none !important;
 }
 
-.intro-screen::before {
-  position: absolute;
-  inset: 11% auto auto 8%;
-  width: 160px;
-  height: 24px;
-  border: 4px solid #111111;
-  border-radius: 8px;
-  background: #dff1d9;
-  content: "";
-  transform: rotate(-7deg);
-}
-
-.intro-screen::after {
-  position: absolute;
-  right: 9%;
-  bottom: 13%;
-  width: 118px;
-  height: 18px;
-  border: 4px solid #111111;
-  border-radius: 8px;
-  background: #ffe1c6;
-  content: "";
-  transform: rotate(6deg);
-}
-
 .skip-button {
   position: absolute;
   top: 28px;
@@ -124,14 +99,14 @@ img {
 .intro-illustration {
   position: relative;
   width: min(1080px, 94vw);
-  height: min(720px, 82vh);
+  height: min(680px, 78vh);
   pointer-events: none;
 }
 
 .intro-land {
   position: absolute;
   left: 50%;
-  bottom: 64px;
+  bottom: 28px;
   z-index: 1;
   width: 395px;
   transform: translateX(-50%);
@@ -140,7 +115,7 @@ img {
 .intro-seedling {
   position: absolute;
   left: calc(50% - 86px);
-  bottom: 128px;
+  bottom: 92px;
   z-index: 2;
   width: 176px;
   transform-origin: center bottom;
@@ -178,10 +153,10 @@ img {
 .intro-grown-tree {
   position: absolute;
   left: 50%;
-  bottom: 52px;
+  bottom: 18px;
   z-index: 2;
   width: min(960px, 92vw);
-  height: min(690px, 78vh);
+  height: min(620px, 68vh);
   transform: translateX(-50%);
   transform-origin: center bottom;
 }
@@ -212,8 +187,7 @@ img {
 
 .intro-grow-branch.upper-left {
   top: 22%;
-  right: 50%;
-  transform-origin: right center;
+  left: 50%;
 }
 
 .intro-grow-branch.lower-right {
@@ -224,9 +198,8 @@ img {
 
 .intro-grow-branch.lower-left {
   top: 50%;
-  right: 49%;
+  left: 49%;
   width: 46%;
-  transform-origin: right center;
 }
 
 .intro-grow-leaf {
@@ -789,18 +762,18 @@ img {
   }
 
   .intro-land {
-    bottom: 54px;
+    bottom: 18px;
     width: 330px;
   }
 
   .intro-seedling {
     left: calc(50% - 64px);
-    bottom: 112px;
+    bottom: 76px;
     width: 132px;
   }
 
   .intro-grown-tree {
-    bottom: 40px;
+    bottom: 10px;
     width: min(620px, 132vw);
     height: min(500px, 72vh);
   }
