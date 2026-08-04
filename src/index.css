@@ -99,7 +99,7 @@ img {
 .intro-illustration {
   position: relative;
   width: min(1080px, 94vw);
-  height: min(680px, 78vh);
+  height: min(720px, 82vh);
   pointer-events: none;
 }
 
@@ -153,10 +153,10 @@ img {
 .intro-grown-tree {
   position: absolute;
   left: 50%;
-  bottom: 18px;
+  bottom: 52px;
   z-index: 2;
   width: min(960px, 92vw);
-  height: min(620px, 68vh);
+  height: min(690px, 78vh);
   transform: translateX(-50%);
   transform-origin: center bottom;
 }
@@ -187,7 +187,8 @@ img {
 
 .intro-grow-branch.upper-left {
   top: 22%;
-  left: 50%;
+  right: 50%;
+  transform-origin: right center;
 }
 
 .intro-grow-branch.lower-right {
@@ -198,8 +199,9 @@ img {
 
 .intro-grow-branch.lower-left {
   top: 50%;
-  left: 49%;
+  right: 49%;
   width: 46%;
+  transform-origin: right center;
 }
 
 .intro-grow-leaf {
@@ -773,7 +775,7 @@ img {
   }
 
   .intro-grown-tree {
-    bottom: 10px;
+    bottom: 40px;
     width: min(620px, 132vw);
     height: min(500px, 72vh);
   }
