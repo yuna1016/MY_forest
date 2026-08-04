@@ -75,15 +75,21 @@ const content = {
   roots: [
     {
       label: "伦敦政治经济学院（LSE）",
-      value: "应用经济学（区域经济方向）理学硕士 · Distinction（优秀） · 2023.09–2025.04",
+      degree: "应用经济学（区域经济方向）理学硕士",
+      highlight: "Distinction（优秀）",
+      time: "2023.09–2025.04",
     },
     {
       label: "英国南安普顿大学（UOS）",
-      value: "经济与金融理学学士 · GPA 3.98/4.00（专业前 3%） · 2021.09–2023.06",
+      degree: "经济与金融理学学士",
+      highlight: "GPA 3.98/4.00 · 专业前 3%",
+      time: "2021.09–2023.06",
     },
     {
       label: "江西财经大学",
-      value: "金融学（CFA 方向）经济学学士 · GPA 92/100（年级前 1%） · 2019.09–2021.06",
+      degree: "金融学（CFA 方向）经济学学士",
+      highlight: "GPA 92/100 · 年级前 1%",
+      time: "2019.09–2021.06",
     },
   ],
   branches: [
@@ -488,8 +494,14 @@ function ProfilePage() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
+                    <dt>
+                      <span>{item.label}</span>
+                      <time>{item.time}</time>
+                    </dt>
+                    <dd>
+                      <p className="root-degree">{item.degree}</p>
+                      <p className="root-highlight">{item.highlight}</p>
+                    </dd>
                   </div>
                 </div>
               ))}
