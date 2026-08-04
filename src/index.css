@@ -548,6 +548,15 @@ img {
   margin-right: 9px;
 }
 
+.root-tag small {
+  color: rgba(17, 17, 17, 0.48);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin-left: 7px;
+  transform: translateY(1px);
+}
+
 .root-tag.peach {
   background: #fff1e5;
 }

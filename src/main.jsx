@@ -74,9 +74,18 @@ const content = {
     { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
     { label: "英国南安普顿大学 · 理学学士", tone: "peach", emphasis: "wide" },
     { label: "Shopee · 国际化商业分析师", tone: "orange", emphasis: "strong" },
-    { label: "快手 · 风险策略分析实习生", tone: "yellow", emphasis: "wide" },
-    { label: "SHEIN · 商业分析（PMO）实习生", tone: "peach", emphasis: "wide" },
-    { label: "AI × 业务", tone: "sage", emphasis: "strong" },
+    {
+      label: "快手 · 风险策略分析师",
+      detail: "*实习",
+      tone: "yellow",
+      emphasis: "wide",
+    },
+    {
+      label: "SHEIN · 商业分析师（PMO）",
+      detail: "*实习",
+      tone: "peach",
+      emphasis: "wide",
+    },
   ],
   vibes: [
     {
@@ -462,7 +471,8 @@ function ProfilePage() {
                   whileHover={{ y: -5, rotate: 0, scale: 1.04 }}
                   transition={{ duration: 0.26, delay: index * 0.05, ease: "easeOut" }}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.detail ? <small>{item.detail}</small> : null}
                 </motion.span>
               ))}
             </div>
