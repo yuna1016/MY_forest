@@ -596,17 +596,6 @@ function VibesShowcase() {
           </p>
           <h3>{activeItem.title}</h3>
           <p className="project-description">{activeItem.desc}</p>
-          {activeItem.video && (
-            <video
-              className="project-video"
-              src={activeItem.video}
-              controls
-              playsInline
-              preload="metadata"
-            >
-              Your browser does not support embedded video.
-            </video>
-          )}
           <div className="project-tags" aria-label="项目标签">
             {activeItem.tags.map((tag) => (
               <span key={tag}>{tag}</span>

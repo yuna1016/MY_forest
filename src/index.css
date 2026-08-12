@@ -648,6 +648,7 @@ img {
 
 .deck-card video {
   display: block;
+  object-fit: cover;
 }
 
 .deck-card span {
@@ -728,16 +729,6 @@ img {
   color: #3d3d3d;
   font-size: 15px;
   line-height: 1.7;
-}
-
-.project-video {
-  display: block;
-  width: min(100%, 620px);
-  margin: 16px auto 0;
-  border: 2px solid #111111;
-  border-radius: 8px;
-  background: #111111;
-  box-shadow: 4px 5px 0 rgba(17, 17, 17, 0.9);
 }
 
 .project-tags {
