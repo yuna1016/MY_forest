@@ -62,6 +62,7 @@ const vibeCovers = [
   asset("vibes/vibe-ai-notes.png"),
   asset("vibes/vibe-design-lab.png"),
   asset("vibes/vibe-side-projects.png"),
+  asset("vibes/vibe-visual-review-bridge.png"),
 ];
 
 const content = {
@@ -119,6 +120,7 @@ const content = {
       category: "DESIGN TOOL",
       desc: "Built for designers and developers who need to tell AI agents exactly what to change. Local visual review workbench.",
       tags: ["Visual review", "AI agents", "Design tools"],
+      cover: vibeCovers[3],
       video: "/videos/visual-review-bridge.mp4",
     },
   ],
@@ -553,19 +555,7 @@ function VibesShowcase() {
                 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
               >
-                {item.video ? (
-                  <video
-                    src={item.video}
-                    muted
-                    loop
-                    autoPlay
-                    playsInline
-                    preload="metadata"
-                    aria-label={`${item.title} 项目预览视频`}
-                  />
-                ) : (
-                  <img src={item.cover} alt="" draggable="false" />
-                )}
+                <img src={item.cover} alt="" draggable="false" />
                 <span>{item.category}</span>
               </motion.button>
             );
@@ -596,6 +586,17 @@ function VibesShowcase() {
           </p>
           <h3>{activeItem.title}</h3>
           <p className="project-description">{activeItem.desc}</p>
+          {activeItem.video && (
+            <video
+              className="project-video"
+              src={activeItem.video}
+              controls
+              playsInline
+              preload="metadata"
+            >
+              Your browser does not support embedded video.
+            </video>
+          )}
           <div className="project-tags" aria-label="项目标签">
             {activeItem.tags.map((tag) => (
               <span key={tag}>{tag}</span>
