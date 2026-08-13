@@ -127,7 +127,7 @@ const content = {
     {
       title: "Choux World",
       category: "AI COMPANION",
-      desc: "Built for curious thinkers who want to explore any question with a private council of AI great minds. Your Private AI Braintrust.",
+      desc: "Built for curious thinkers who want to explore any question with master minds. Your Private AI Braintrust.",
       tags: ["AI companions", "Deep thinking", "Private braintrust"],
       cover: vibeCovers[4],
       video: "/videos/choux-world.mp4",
