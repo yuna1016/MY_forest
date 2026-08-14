@@ -775,6 +775,62 @@ img {
   background: #f28452;
 }
 
+.image-lightbox {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(17, 17, 17, 0.64);
+  padding: 28px;
+}
+
+.lightbox-content {
+  position: relative;
+  width: min(1120px, 94vw);
+  max-height: 90vh;
+  border: 3px solid #111111;
+  border-radius: 14px;
+  background: #fffdf7;
+  box-shadow: 8px 9px 0 #111111;
+  padding: 12px 12px 10px;
+}
+
+.lightbox-content img {
+  display: block;
+  width: 100%;
+  max-height: calc(90vh - 74px);
+  border: 1.5px solid #111111;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+.lightbox-content p {
+  margin: 8px 42px 0 3px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -17px;
+  right: -17px;
+  z-index: 1;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 2px solid #111111;
+  border-radius: 50%;
+  background: #f28452;
+  box-shadow: 2px 2px 0 #111111;
+  color: #111111;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
 @media (max-width: 980px) {
   .profile-page {
     width: min(100% - 28px, 760px);

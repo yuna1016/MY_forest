@@ -517,6 +517,7 @@ function ProfilePage() {
 
 function VibesShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [previewItem, setPreviewItem] = useState(null);
   const activeItem = content.vibes[activeIndex];
   const total = content.vibes.length;
   const move = (direction) => {
@@ -552,8 +553,16 @@ function VibesShowcase() {
                 className={`deck-card${isActive ? " is-active" : ""}`}
                 type="button"
                 key={item.title}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`查看项目：${item.title}`}
+                onClick={() => {
+                  if (isActive) {
+                    setPreviewItem(item);
+                  } else {
+                    setActiveIndex(index);
+                  }
+                }}
+                aria-label={
+                  isActive ? `放大查看${item.title}封面图` : `查看项目：${item.title}`
+                }
                 animate={{
                   x: offset * 188,
                   y: Math.abs(offset) * 16,
@@ -625,6 +634,41 @@ function VibesShowcase() {
           />
         ))}
       </div>
+
+      <AnimatePresence>
+        {previewItem && (
+          <motion.div
+            className="image-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${previewItem.title} 封面图预览`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setPreviewItem(null)}
+          >
+            <motion.div
+              className="lightbox-content"
+              initial={{ opacity: 0, scale: 0.94, y: 14 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                className="lightbox-close"
+                type="button"
+                onClick={() => setPreviewItem(null)}
+                aria-label="关闭图片预览"
+              >
+                ×
+              </button>
+              <img src={previewItem.cover} alt={`${previewItem.title} 项目封面`} />
+              <p>{previewItem.title}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
