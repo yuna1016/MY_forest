@@ -68,7 +68,7 @@ const content = {
   about: {
     name: "Yuna Peng (Fangyuan)",
     detail:
-      "在商业分析与 AI 产品之间来回穿梭，喜欢把复杂的问题梳理成清晰、可执行的体验。最近在探索人和 AI 如何一起思考，也在把那些好奇心做成小小的作品。",
+      "A dreamer with curiosity, turning complex questions into clear, human-centered experiences. I explore how people and AI can think together—and turn that curiosity into little things that make life more interesting.",
   },
   roots: [
     { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
