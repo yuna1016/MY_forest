@@ -68,7 +68,7 @@ const content = {
   about: {
     name: "Yuna Peng (Fangyuan)",
     detail:
-      "A dreamer with curiosity, turning complex questions into clear, human-centered experiences. I explore how people and AI can think together—and turn that curiosity into little things that make life more interesting.",
+      "A dreamer. A creator. A hungry soul—relentlessly curious and quick to turn ideas into action.",
   },
   roots: [
     { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
