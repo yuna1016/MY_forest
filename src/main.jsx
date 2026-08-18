@@ -18,6 +18,7 @@ import "./index.css";
 const siteIllustrations = import.meta.glob(
   [
     "../assets/site-illustrations/**/*.png",
+    "../assets/site-illustrations/**/*.jpg",
     "!../assets/site-illustrations/**/*source-alpha.png",
   ],
   {
@@ -49,7 +50,7 @@ const treeAssets = {
 
 const puffAssets = {
   sitting: asset("puff/puff-sitting-branch.png"),
-  avatar: asset("puff/puff-avatar.png"),
+  avatar: asset("profile/yuna-peng.jpg"),
 };
 
 const titleAssets = {
@@ -65,9 +66,9 @@ const vibeCovers = [
 
 const content = {
   about: {
-    name: "【填】",
+    name: "Yuna Peng (Fangyuan)",
     detail:
-      "这里可以放一段 2-3 句的自我介绍：你正在关注什么、擅长什么、喜欢怎样把想法落到真实作品里。",
+      "在商业分析与 AI 产品之间来回穿梭，喜欢把复杂的问题梳理成清晰、可执行的体验。最近在探索人和 AI 如何一起思考，也在把那些好奇心做成小小的作品。",
   },
   roots: [
     { label: "伦敦政治经济学院 · 理学硕士", tone: "sage", emphasis: "wide" },
@@ -661,7 +662,7 @@ function AboutBanner() {
         </div>
       </div>
       <div className="avatar-frame">
-        <img src={puffAssets.avatar} alt="Puff 头像占位插画" draggable="false" />
+        <img className="profile-photo" src={puffAssets.avatar} alt="Yuna Peng" draggable="false" />
       </div>
       <p className="about-detail about-detail-wide">{content.about.detail}</p>
     </header>

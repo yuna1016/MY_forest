@@ -336,6 +336,14 @@ img {
   transform: translateY(12px);
 }
 
+.avatar-frame img.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: none;
+}
+
 .garden-layout {
   display: grid;
   grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
@@ -851,6 +859,10 @@ img {
     width: 102px;
   }
 
+  .avatar-frame img.profile-photo {
+    width: 100%;
+  }
+
   .garden-layout {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -965,6 +977,12 @@ img {
   .avatar-frame img {
     width: 80px;
     transform: translateY(7px);
+  }
+
+  .avatar-frame img.profile-photo {
+    width: 100%;
+    height: 100%;
+    transform: none;
   }
 
   .about-name {
