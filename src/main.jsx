@@ -59,9 +59,6 @@ const titleAssets = {
 };
 
 const vibeCovers = [
-  asset("vibes/vibe-ai-notes.png"),
-  asset("vibes/vibe-design-lab.png"),
-  asset("vibes/vibe-side-projects.png"),
   asset("vibes/vibe-visual-review-bridge.png"),
   asset("vibes/vibe-choux-world.png"),
 ];
@@ -96,32 +93,11 @@ const content = {
   ],
   vibes: [
     {
-      title: "AI Hub & Skill Factory",
-      category: "AI PRODUCT",
-      desc: "从 0 到 1 搭建面向业务的 AI 工作台与 Skill 生产流程，让团队经验能够被沉淀、复用和持续迭代。",
-      tags: ["AI 落地", "知识沉淀", "0 → 1"],
-      cover: vibeCovers[0],
-    },
-    {
-      title: "供应链履约分析 Agent",
-      category: "DATA AGENT",
-      desc: "将对账、异常定位与指标归因串联成自动化分析链路，帮助业务更快找到履约问题和行动方向。",
-      tags: ["供应链", "商业智能", "自动化"],
-      cover: vibeCovers[1],
-    },
-    {
-      title: "风险监控与策略优化",
-      category: "RISK INSIGHT",
-      desc: "通过监控看板与 Python 机器人连接风险发现、策略分析和团队协作，缩短从异常出现到响应处理的路径。",
-      tags: ["风险策略", "数据监控", "协同"],
-      cover: vibeCovers[2],
-    },
-    {
       title: "Visual Review Bridge",
       category: "DESIGN TOOL",
       desc: "Built for designers and developers who need to tell AI agents exactly what to change. Local visual review workbench.",
       tags: ["Visual review", "AI agents", "Design tools"],
-      cover: vibeCovers[3],
+      cover: vibeCovers[0],
       video: "/videos/visual-review-bridge.mp4",
     },
     {
@@ -129,7 +105,7 @@ const content = {
       category: "AI COMPANION",
       desc: "Built for curious thinkers who want to explore any question with master minds. Your Private AI Braintrust.",
       tags: ["AI companions", "Deep thinking", "Private braintrust"],
-      cover: vibeCovers[4],
+      cover: vibeCovers[1],
       video: "/videos/choux-world.mp4",
     },
   ],
