@@ -50,7 +50,7 @@ const treeAssets = {
 
 const puffAssets = {
   sitting: asset("puff/puff-sitting-branch.png"),
-  avatar: asset("profile/yuna-peng.jpg"),
+  avatar: asset("profile/yuna-peng-cropped.png"),
 };
 
 const titleAssets = {
