@@ -66,7 +66,7 @@ const vibeCovers = [
 
 const content = {
   about: {
-    name: "Yuna Peng (Fangyuan)",
+    name: "Yuna Peng 方园",
     detail:
       "A dreamer. A creator. A hungry soul—relentlessly curious and quick to turn ideas into action.",
   },
