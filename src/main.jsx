@@ -64,6 +64,8 @@ const vibeCovers = [
   asset("vibes/vibe-choux-world.png"),
 ];
 
+const siteBase = import.meta.env.BASE_URL;
+
 const content = {
   about: {
     name: "Yuna Peng 方园",
@@ -99,7 +101,7 @@ const content = {
       desc: "Built for designers and developers who need to tell AI agents exactly what to change. Local visual review workbench.",
       tags: ["Visual review", "AI agents", "Design tools"],
       cover: vibeCovers[0],
-      video: "/videos/visual-review-bridge.mp4",
+      video: `${siteBase}videos/visual-review-bridge.mp4`,
     },
     {
       title: "Choux World",
@@ -107,7 +109,7 @@ const content = {
       desc: "Built for curious thinkers who want to explore any question with master minds. Your Private AI Braintrust.",
       tags: ["AI companions", "Deep thinking", "Private braintrust"],
       cover: vibeCovers[1],
-      video: "/videos/choux-world.mp4",
+      video: `${siteBase}videos/choux-world.mp4`,
     },
   ],
 };
@@ -483,6 +485,7 @@ function ProfilePage() {
             titleLabel="My Vibes"
             connectorLeaf={treeAssets.leafVibes}
             connectorDelay={1.3}
+            status={{ label: "More to come", icon: treeAssets.leafSmallA }}
           >
             <VibesShowcase />
           </ContentSection>
@@ -658,13 +661,16 @@ function AboutBanner() {
         <img className="title-image about-title" src={titleAssets.about} alt="" />
         <div className="about-text-grid">
           <p className="about-name">{content.about.name}</p>
-          <p className="about-line">{content.about.line}</p>
+          <p className="about-detail">{content.about.detail}</p>
+          <a className="about-contact" href="mailto:alleriafypeng@icloud.com">
+            <span aria-hidden="true">📮</span>
+            welcome to connect
+          </a>
         </div>
       </div>
       <div className="avatar-frame">
         <img className="profile-photo" src={puffAssets.avatar} alt="Yuna Peng" draggable="false" />
       </div>
-      <p className="about-detail about-detail-wide">{content.about.detail}</p>
     </header>
   );
 }
@@ -771,6 +777,7 @@ function ContentSection({
   titleLabel,
   connectorLeaf,
   connectorDelay,
+  status,
   children,
 }) {
   return (
@@ -803,6 +810,16 @@ function ContentSection({
       <article className="content-block">
         <h2 className="sr-only">{titleLabel}</h2>
         <img className="title-image" src={title} alt="" draggable="false" />
+        {status ? (
+          <span
+            className="section-status"
+            aria-label={status.label}
+            data-tooltip={status.label}
+            tabIndex="0"
+          >
+            <img src={status.icon} alt="" draggable="false" />
+          </span>
+        ) : null}
         {children}
       </article>
     </section>
