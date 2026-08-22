@@ -19,6 +19,7 @@ const siteIllustrations = import.meta.glob(
   [
     "../assets/site-illustrations/**/*.png",
     "../assets/site-illustrations/**/*.jpg",
+    "../assets/site-illustrations/**/*.webp",
     "!../assets/site-illustrations/**/*source-alpha.png",
   ],
   {
@@ -49,8 +50,8 @@ const treeAssets = {
 };
 
 const puffAssets = {
-  sitting: asset("puff/puff-sitting-branch.png"),
-  avatar: asset("profile/yuna-peng-cropped.png"),
+  sitting: asset("puff/puff-sitting-branch.webp"),
+  avatar: asset("profile/yuna-peng-cropped.webp"),
 };
 
 const titleAssets = {
@@ -60,8 +61,8 @@ const titleAssets = {
 };
 
 const vibeCovers = [
-  asset("vibes/vibe-visual-review-bridge.png"),
-  asset("vibes/vibe-choux-world.png"),
+  asset("vibes/vibe-visual-review-bridge.webp"),
+  asset("vibes/vibe-choux-world.webp"),
 ];
 
 const siteBase = import.meta.env.BASE_URL;
@@ -553,7 +554,7 @@ function VibesShowcase() {
                 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
               >
-                <img src={item.cover} alt="" draggable="false" />
+                <img src={item.cover} alt="" draggable="false" loading="lazy" />
                 <span>{item.category}</span>
               </motion.button>
             );
@@ -643,7 +644,11 @@ function VibesShowcase() {
               >
                 ×
               </button>
-              <img src={previewItem.cover} alt={`${previewItem.title} 项目封面`} />
+              <img
+                src={previewItem.cover}
+                alt={`${previewItem.title} 项目封面`}
+                loading="lazy"
+              />
               <p>{previewItem.title}</p>
             </motion.div>
           </motion.div>
